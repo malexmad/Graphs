@@ -11,16 +11,19 @@ def earliest_ancestor(ancestors, starting_node):
         parent.append(ancestor[0])
         child.append(ancestor[1])
 
+
     for i in range(0, len(parent)):
         vertex[child[i]].add(parent[i])
 
     n = 0
     while len(vertex[starting_node]) != 0:
         n += 1
+
         if starting_node in vertex:
-
-            starting_node = vertex[starting_node].pop()
-
+            if len(vertex[starting_node]) > 1:
+                starting_node = min(vertex[starting_node])
+            else:
+                starting_node = vertex[starting_node].pop()
 
     if n == 0:
         return -1
